@@ -2,7 +2,7 @@
 
 Starter repo for building a product with:
 
-- **Frontend**: React + Vite
+- **Frontend**: React + Vite, styled with Tailwind CSS v4 and [shadcn/ui](https://ui.shadcn.com)
 - **Backend**: Flask **application factory** + blueprints, SQLAlchemy, Alembic migrations
 
 The key convention is **all API routes live under `/api`**, so:
@@ -41,6 +41,11 @@ The key convention is **all API routes live under `/api`**, so:
 ├── application.py            # WSGI entrypoint exposing `app` (Gunicorn imports this)
 ├── migrations/               # Alembic / Flask-Migrate migrations (created by `flask db init`)
 ├── src/                      # React app source
+│   ├── components/ui/        # shadcn/ui components (added via `npx shadcn add`)
+│   ├── lib/utils.js          # `cn()` class-merging helper used by shadcn components
+│   └── index.css             # Tailwind entry + shadcn theme variables
+├── components.json           # shadcn/ui CLI config
+├── jsconfig.json             # `@/` → `src/` path alias (Vite alias is in vite.config.js)
 ├── vite.config.js            # Dev proxy `/api` → Flask
 ├── Dockerfile.combo          # Multi-stage build: React build + Python/Gunicorn runtime
 ├── setup-env.sh              # Helper to create `api/.env`
@@ -119,6 +124,24 @@ npm run dev
 ```
 
 Open **`http://localhost:5173`**.
+
+## Styling: Tailwind CSS + shadcn/ui
+
+Tailwind v4 is wired in through the `@tailwindcss/vite` plugin; there is no `tailwind.config.js`. The single CSS entry is `src/index.css`, which imports Tailwind and defines the shadcn theme as CSS variables (light and dark).
+
+shadcn/ui components live in `src/components/ui/` and are plain source files you own and can edit. Add more with the CLI:
+
+```bash
+npx shadcn@latest add dialog
+```
+
+The project is JavaScript (JSX), so the CLI generates `.jsx` files. Import components via the `@/` alias:
+
+```jsx
+import { Button } from '@/components/ui/button'
+```
+
+Dark mode is class-based: add the `dark` class to `<html>` to switch themes.
 
 ## API: how it works
 
