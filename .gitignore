@@ -1,0 +1,52 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+build
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+
+# Python fragments
+*.pyc
+*.pyo
+__pycache__/
+*/__pycache__/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Mac fragments
+*.DS_Store
+
+*/venv/*
+
+# Environment files (never commit secrets)
+.env
+.env.*
+api/.env
+!.env.example
+!api/.env.example
+
+# Local databases / artifacts
+*.db
+*.sqlite
+*.sqlite3
